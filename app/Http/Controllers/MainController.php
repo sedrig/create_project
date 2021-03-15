@@ -11,7 +11,7 @@ class MainController extends Controller
 {
     public function index()
     {
-        return view('auth.register');
+        return view('auth.login');
     }
 
     public function register(Request $request)
@@ -27,5 +27,33 @@ class MainController extends Controller
             ]);
 
         return view('auth.login');
+    }
+
+    public function login(Request $request)
+    {
+        $user = DB::table('users')
+            ->where('email', $request->email)
+            ->first();
+
+        //dd($user);
+        if ($user) {
+            if ($user->is_admin == 1) {
+                if (Hash::check($request->password, $user->password)) {
+                    $request->session()->put('LoggedAdmin', $user->id);
+                    return redirect()->route('admin');
+                } else {
+                    return back()->with('fail', 'Не правильний логін або пароль');
+                }
+            } else if ($user->is_admin == 0) {
+                if (Hash::check($request->password, $user->password)) {
+                    $request->session()->put('LoggedUser', $user->id);
+                    return redirect()->route('profile');
+                } else {
+                    return back()->with('fail', 'Не правильний логін або пароль');
+                }
+            }
+        } else {
+            return back()->with('fail', 'Не правильний логін або пароль');
+        }
     }
 }

@@ -8,7 +8,7 @@
             <div class="card-header">Авторизация</div>
 
             <div class="card-body">
-                <form method="POST" action="" aria-label="Login">
+                <form method="POST" action="{{ route('login') }}" aria-label="Login">
                     @csrf
                     <div class="form-group row">
                         <label for="email" class="col-sm-4 col-form-label text-md-right">E-Mail</label>
