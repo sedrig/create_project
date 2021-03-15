@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Auth\Project\ProjectController;
+use App\Http\Controllers\Auth\Task\TaskController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +18,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [MainController::class, 'index'])->name('home');
+
+Route::prefix('/authenticate')->group(function () {
+    Route::resource('project', ProjectController::class);
+    Route::resource('task', TaskController::class);
+    Route::get('auth/project', [AuthController::class, 'index'])->name('project');
+});
 
 Route::post('/register', [MainController::class, 'register'])->name('register');
 

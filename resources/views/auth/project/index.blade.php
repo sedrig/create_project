@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Категории</h1>
+        <h1>Проекти</h1>
         <table class="table">
             <tbody>
                 <tr>
@@ -12,30 +12,27 @@
                         #
                     </th>
                     <th>
-                        Код
+                        Назва
                     </th>
                     <th>
-                        Название
-                    </th>
-                    <th>
-                        Действия
+                        Дії
                     </th>
                 </tr>
-                @foreach ($categories as $category)
+                @foreach ($projects as $project)
                     <tr>
-                        <td>{{ $category->id }}</td>
-                        <td>{{ $category->code }}</td>
-                        <td>{{ $category->name }}</td>
+                        <td>{{ $project->id }}</td>
+
+                        <td>{{ $project->name }}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <form action="{{ route('categories.destroy', $category) }}" method="post">
+                                <form action="{{ route('project.destroy', $project) }}" method="post">
                                     <a class="btn btn-success" type="button"
-                                        href="{{ route('categories.show', $category) }}">Открыть</a>
+                                        href="{{ route('project.show', $project) }}">Відкрити</a>
                                     <a class="btn btn-warning" type="button"
-                                        href="{{ route('categories.edit', $category) }}">Редактировать</a>
+                                        href="{{ route('project.edit', $project) }}">Редагувати</a>
                                     @csrf
                                     @method('delete')
-                                    <input class="btn btn-danger" type="submit" value="Удалить">
+                                    <input class="btn btn-danger" type="submit" value="Видалити">
                                 </form>
                             </div>
                         </td>
@@ -45,7 +42,7 @@
 
             </tbody>
         </table>
-        {{ $categories->links() }}
-        <a class="btn btn-success" type="button" href="{{ route('categories.create') }}">Добавить категорию</a>
+        {{ $projects->links() }}
+        <a class="btn btn-success" type="button" href="{{ route('project.create') }}">Додати проект</a>
     </div>
 @endsection

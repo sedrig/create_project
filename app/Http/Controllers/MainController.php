@@ -47,7 +47,7 @@ class MainController extends Controller
             } else if ($user->is_admin == 0) {
                 if (Hash::check($request->password, $user->password)) {
                     $request->session()->put('LoggedUser', $user->id);
-                    return redirect()->route('profile');
+                    return redirect()->route('project');
                 } else {
                     return back()->with('fail', 'Не правильний логін або пароль');
                 }
