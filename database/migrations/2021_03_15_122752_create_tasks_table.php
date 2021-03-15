@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->id();
             $table->integer('status_id');
             $table->integer('project_id');
-            $table->text('ímage')->nullable();
+            $table->text('image')->nullable();
             $table->string('name');
             $table->timestamps();
         });

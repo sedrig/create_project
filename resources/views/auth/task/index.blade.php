@@ -18,18 +18,18 @@
                         Дії
                     </th>
                 </tr>
-                @foreach ($tasks as $task)
+                @foreach ($query as $tasks)
                     <tr>
-                        <td>{{ $task->id }}</td>
+                        <td>{{ $tasks->id }}</td>
 
-                        <td>{{ $task->name }}</td>
+                        <td>{{ $tasks->name }}</td>
                         <td>
                             <div class="btn-group" role="group">
-                                <form action="{{ route('task.destroy', $task) }}" method="post">
+                                <form action="{{ route('task.destroy', $tasks) }}" method="post">
                                     <a class="btn btn-success" type="button"
-                                        href="{{ route('task.show', $task) }}">Открыть</a>
+                                        href="{{ route('task.show', $tasks) }}">Відкрити</a>
                                     <a class="btn btn-warning" type="button"
-                                        href="{{ route('task.edit', $task) }}">Редактировать</a>
+                                        href="{{ route('task.edit', $tasks) }}">Редагувати</a>
                                     @csrf
                                     @method('delete')
                                     <input class="btn btn-danger" type="submit" value="Видалити">
@@ -42,7 +42,7 @@
 
             </tbody>
         </table>
-        {{ $tasks->links() }}
+        {{ $query->links() }}
         <a class="btn btn-success" type="button" href="{{ route('task.create') }}">Додати завдання</a>
     </div>
 @endsection

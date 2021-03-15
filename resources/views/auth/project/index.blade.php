@@ -33,6 +33,9 @@
                                     @csrf
                                     @method('delete')
                                     <input class="btn btn-danger" type="submit" value="Видалити">
+                                    <a class="btn btn-success" type="button"
+                                        href="{{ route('with_project', $project) }}">Список
+                                        задач</a>
                                 </form>
                             </div>
                         </td>

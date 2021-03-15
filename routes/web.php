@@ -20,8 +20,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [MainController::class, 'index'])->name('home');
 
 Route::prefix('/authenticate')->group(function () {
+
     Route::resource('project', ProjectController::class);
+    Route::get('task/status/{pid}/{sid}', [TaskController::class, 'status'])->name('status_project');
+    Route::get('task/with_project/{id}', [TaskController::class, 'popular'])->name('with_project');
     Route::resource('task', TaskController::class);
+
+
     Route::get('auth/project', [AuthController::class, 'index'])->name('project');
 });
 
