@@ -16,8 +16,8 @@ class ProjectSeeder extends Seeder
     {
         DB::table('projects')
             ->insert([
-                ['name' => 'Facebook'],
-                ['name' => 'Instagramm'],
+                ['name' => 'Facebook', 'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()],
+                ['name' => 'Instagramm', 'created_at' => \Carbon\Carbon::now(), 'updated_at' => \Carbon\Carbon::now()],
             ]);
     }
 }

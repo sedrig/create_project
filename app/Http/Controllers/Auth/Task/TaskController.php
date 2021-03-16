@@ -20,10 +20,6 @@ class TaskController extends Controller
             ->where('id', $id)
             ->first();
         return Storage::download($picture->image, $name);
-        //dd(Storage::url($picture));
-        /*$path=file($picture)->
-        dd($picture);
-        return Storage::download(url($picture));*/
     }
 
     public function status($pid, $sid)
@@ -106,12 +102,6 @@ class TaskController extends Controller
     {
 
 
-        /*$tasks = Status::find(1)->tasks;
-
-        foreach ($tasks as $task) {
-            dump($task);
-        }*/
-
         $task = Task::find($id);
 
         //dd($task);
@@ -126,9 +116,18 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($pid, $id)
     {
-        //
+        //dd($pid);
+        $tasky = DB::table('tasks')
+            ->where('id', '=', $pid)
+            ->first();
+
+
+        $status = Status::get();
+
+        //dd($projecty->name);
+        return view('auth.task.form', compact('tasky', 'id', 'status'));
     }
 
     /**
@@ -140,7 +139,25 @@ class TaskController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+        if ($request->has('image')) {
+            Storage::delete($request->image);
+            $path = $request->file('image')->store('tasks');
+        }
+
+
+
+        DB::table('tasks')
+            ->where('id', $id)
+            ->update([
+                'status_id' => $request->status_id,
+                'name' => $request->name,
+                'project_id' => $request->project_id,
+                'image' => $path,
+                'updated_at' => \Carbon\Carbon::now()
+
+            ]);
+        return redirect()->route('status_project', ['pid' => $request->status_id, 'sid' => $request->project_id]);
     }
 
     /**

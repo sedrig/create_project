@@ -40,7 +40,7 @@
                     <div class="col-sm-6">
                         <select name="status_id" id="statust_id" class="form-control">
                             @foreach ($status as $stat)
-                                <option value="{{ $stat->id }}" @isset($task) @if ($task->category_id == $task->id) selected @endif
+                                <option value="{{ $stat->id }}" @isset($tasky) @if ($tasky->status_id == $stat->id) selected @endif
                                 @endisset>{{ $stat->name }}</option>
                         @endforeach
                     </select>
