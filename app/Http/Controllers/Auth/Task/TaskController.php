@@ -13,8 +13,17 @@ class TaskController extends Controller
 {
     public function status($pid, $sid)
     {
+
         $tasks = Task::where('status_id', $pid)->where('project_id', $sid)->paginate(8);
         dump($tasks);
+        dd($pid);
+        if ($pid === 1) {
+            return view('auth.task.status.new');
+        } elseif ($pid === 2) {
+            return view('auth.task.status.in_progress');
+        } elseif ($pid === 3) {
+            return view('auth.task.status.done');
+        }
         dd('123');
     }
 
@@ -32,8 +41,9 @@ class TaskController extends Controller
     public function index()
     {
         //dd($id);
-        /*$tasks = Task::paginate(8);
-        return view('auth.task.index', compact('tasks'));**/ }
+        $query = Task::paginate(8);
+        return view('auth.task.index', compact('query'));
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -125,6 +135,9 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        //
+        DB::table('tasks')
+            ->where('id', '=', $id)
+            ->delete();
+        return redirect()->route('task.index');
     }
 }
