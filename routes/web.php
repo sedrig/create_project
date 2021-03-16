@@ -21,6 +21,7 @@ Route::get('/', [MainController::class, 'index'])->name('home');
 
 Route::prefix('/authenticate')->group(function () {
 
+    Route::get('/download/{tasks}', [TaskController::class, 'download'])->name('download');
     Route::resource('project', ProjectController::class);
     Route::get('task/create/{id}', [TaskController::class, 'create'])->name('task_create');
     Route::get('task/status/{pid}/{sid}', [TaskController::class, 'status'])->name('status_project');

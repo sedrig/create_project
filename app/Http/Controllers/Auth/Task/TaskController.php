@@ -8,9 +8,24 @@ use App\Models\Status;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
 {
+
+    public function download($id)
+    {
+        $name = 'Рисунок' . $id . ".jpg";
+        $picture = DB::table('tasks')
+            ->where('id', $id)
+            ->first();
+        return Storage::download($picture->image, $name);
+        //dd(Storage::url($picture));
+        /*$path=file($picture)->
+        dd($picture);
+        return Storage::download(url($picture));*/
+    }
+
     public function status($pid, $sid)
     {
 
@@ -66,6 +81,8 @@ class TaskController extends Controller
     {
         //dd($request->all());
         $path = $request->file('image')->store('tasks');
+
+
         DB::table('tasks')
             ->insert([
                 'status_id' => $request->status_id,

@@ -33,7 +33,10 @@
                 </tr>
                 <tr>
                     <td>Завантажена картинка</td>
+
                     <td><img src="{{ Storage::url($task->image) }}" height="240px"></td>
+                    <td><a class="btn btn-success" type="button" href="{{ route('download', $task->id) }}">Завантажити
+                            картинку</a></td>
                 </tr>
                 <tr>
                     <td>Створений</td>
