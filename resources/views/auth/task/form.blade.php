@@ -46,33 +46,28 @@
                     </select>
                 </div>
             </div>
+
+            <div class="input-group row">
+
+                <div class="col-sm-6">
+                    <input type="hidden" class="form-control" name="project_id" id="name" value="{{ $id }}">
+
+                </div>
+            </div>
             <br>
             <br>
             <div class="input-group row">
-                <label for="name" class="col-sm-2 col-form-label">В якому проекті знаходиться: </label>
-                <div class="col-sm-6">
-                    <select name="project_id" id="project_id" class="form-control">
-                        @foreach ($projects as $project)
-                            <option value="{{ $project->id }}" @isset($task) @if ($task->category_id == $task->id) selected @endif
-                            @endisset>{{ $project->name }}</option>
-                    @endforeach
-                </select>
+                <label for="image" class="col-sm-2 col-form-label">Картинка: </label>
+                <div class="col-sm-10">
+                    <label class="btn btn-default btn-file">
+                        Загрузить <input type="file" style="display: none;" name="image" id="image">
+                    </label>
+                </div>
             </div>
+            <br>
+            <br>
+            <button class="btn btn-success">Зберігти</button>
         </div>
-        <br>
-        <br>
-        <div class="input-group row">
-            <label for="image" class="col-sm-2 col-form-label">Картинка: </label>
-            <div class="col-sm-10">
-                <label class="btn btn-default btn-file">
-                    Загрузить <input type="file" style="display: none;" name="image" id="image">
-                </label>
-            </div>
-        </div>
-        <br>
-        <br>
-        <button class="btn btn-success">Зберігти</button>
-    </div>
-</form>
+    </form>
 </div>
 @endsection

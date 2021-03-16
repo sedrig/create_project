@@ -15,16 +15,15 @@ class TaskController extends Controller
     {
 
         $tasks = Task::where('status_id', $pid)->where('project_id', $sid)->paginate(8);
-        dump($tasks);
-        dd($pid);
-        if ($pid === 1) {
-            return view('auth.task.status.new');
-        } elseif ($pid === 2) {
-            return view('auth.task.status.in_progress');
-        } elseif ($pid === 3) {
-            return view('auth.task.status.done');
+
+        if ($pid == 1) {
+
+            return view('auth.task.status.new', compact('tasks', 'sid'));
+        } elseif ($pid == 2) {
+            return view('auth.task.status.in_progress', compact('tasks', 'sid'));
+        } elseif ($pid == 3) {
+            return view('auth.task.status.done', compact('tasks', 'sid'));
         }
-        dd('123');
     }
 
     public function popular($id)
@@ -50,11 +49,11 @@ class TaskController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
         $projects = Project::get();
         $status = Status::get();
-        return view('auth.task.form', compact('status', 'projects'));
+        return view('auth.task.form', compact('status', 'projects', 'id'));
     }
 
     /**
@@ -77,7 +76,7 @@ class TaskController extends Controller
                 'updated_at' => \Carbon\Carbon::now()
 
             ]);
-        return redirect()->route('task.index');
+        return redirect()->route('status_project', ['pid' => $request->status_id, 'sid' => $request->project_id]);
     }
 
     /**
@@ -138,6 +137,6 @@ class TaskController extends Controller
         DB::table('tasks')
             ->where('id', '=', $id)
             ->delete();
-        return redirect()->route('task.index');
+        return redirect()->back();
     }
 }

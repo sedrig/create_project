@@ -31,7 +31,7 @@
                     <ul class="nav navbar-nav">
 
                         <li><a href="{{ route('project.index') }}">Проекти</a></li>
-                        <li><a href="{{ route('task.index') }}">Завдання</a>
+
 
                     </ul>
 
