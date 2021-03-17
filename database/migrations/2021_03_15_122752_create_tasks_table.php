@@ -20,6 +20,7 @@ class CreateTasksTable extends Migration
             $table->text('image')->nullable();
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

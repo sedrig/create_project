@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth\Project;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -111,9 +112,10 @@ class ProjectController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('projects')
-            ->where('id', '=', $id)
-            ->delete();
+
+        Project::where('id', $id)->delete();
+
+        Task::where('project_id', $id)->delete();
         return redirect()->route('project.index');
     }
 }

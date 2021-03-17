@@ -168,9 +168,9 @@ class TaskController extends Controller
      */
     public function destroy($id)
     {
-        DB::table('tasks')
-            ->where('id', '=', $id)
-            ->delete();
+
+
+        Task::where('id', $id)->delete();
         return redirect()->back();
     }
 }
