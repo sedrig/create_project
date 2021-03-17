@@ -9,6 +9,30 @@ use Illuminate\Testing\Fluent\Concerns\Has;
 
 class MainController extends Controller
 {
+
+    public function login_form()
+    {
+        return view('auth.authorizate.login');
+    }
+
+    public function register_form()
+    {
+        return view('auth.authorizate.register');
+    }
+
+    public function logout()
+    {
+        if (session()->has('LoggedUser')) {
+            session()->pull('LoggedUser');
+        }
+
+        if (session()->has('LoggedAdmin')) {
+            session()->pull('LoggedAdmin');
+        }
+
+        return redirect()->route('login_form');
+    }
+
     public function index()
     {
         return view('auth.login');
@@ -25,8 +49,9 @@ class MainController extends Controller
                 'created_at' => \Carbon\Carbon::now(),
                 'updated_at' => \Carbon\Carbon::now(),
             ]);
-
-        return view('auth.login');
+        if ($query) {
+            return view('auth.authorizate.login');
+        }
     }
 
     public function login(Request $request)
@@ -40,7 +65,7 @@ class MainController extends Controller
             if ($user->is_admin == 1) {
                 if (Hash::check($request->password, $user->password)) {
                     $request->session()->put('LoggedAdmin', $user->id);
-                    return redirect()->route('admin');
+                    return redirect()->route('project');
                 } else {
                     return back()->with('fail', 'Не правильний логін або пароль');
                 }

@@ -33,9 +33,16 @@ Route::prefix('/authenticate')->group(function () {
     Route::get('auth/project', [AuthController::class, 'index'])->name('project');
 });
 
+
+Route::get('/login_form', [MainController::class, 'login_form'])->name('login_form');
+
+Route::get('/register_form', [MainController::class, 'register_form'])->name('register_form');
+
 Route::post('/register', [MainController::class, 'register'])->name('register');
 
 Route::post('/login', [MainController::class, 'login'])->name('login');
+
+Route::get('/logout', [MainController::class, 'logout'])->name('logout');
 
 Route::get('/register', function () {
     return view('auth.register');

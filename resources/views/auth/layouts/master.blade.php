@@ -34,43 +34,40 @@
 
 
                     </ul>
+                    @if (!session()->has('LoggedUser') && !session()->has('LoggedAdmin'))
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('login_form') }}">Увійти</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('register_form') }}">Зареєструватися</a>
+                            </li>
+                        </ul>
+                    @endif
+
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Войти</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="">Зарегистрироваться</a>
-                        </li>
-                    </ul>
 
+                        @if (session()->has('LoggedAdmin'))
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Адміністратор</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}">Вийти</a>
+                            </li>
+                        @endif
+                        @if (session()->has('LoggedUser'))
 
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Користувач</a>
 
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            </li>
 
-                                Администратор
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('logout') }}">Вийти</a>
+                            </li>
 
-
-                                Пользователь
-
-
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href=""
-                                    onclick="event.preventDefault();
-                                                                                 document.getElementById('logout-form').submit();">
-                                    Выйти
-                                </a>
-
-                                <form id="logout-form" action="" method="POST" style="display: none;">
-                                    @csrf
-                                </form>
-                            </div>
-                        </li>
+                        @endif
                     </ul>
 
 
