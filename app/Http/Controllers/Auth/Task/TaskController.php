@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Auth\Task;
 
 use App\Http\Controllers\Controller;
+use App\Mail\TestMail;
 use App\Models\Project;
 use App\Models\Status;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 
 class TaskController extends Controller
@@ -140,23 +142,46 @@ class TaskController extends Controller
     public function update(Request $request, $id)
     {
 
-        if ($request->has('image')) {
-            Storage::delete($request->image);
-            $path = $request->file('image')->store('tasks');
+
+        $for_mail = DB::table('tasks')
+            ->where('id', $id)
+            ->first();
+        if ($for_mail->status_id != $request->status_id) {
+
+            $details = [
+                'title' => 'зміна з статусу ' . $for_mail->status_id . ' на ' . $request->status_id,
+                'body' => 'зміна з статусу ' . $for_mail->status_id . ' на ' . $request->status_id
+            ];
+
+            Mail::to("obidos228@gmail.com")->send(new TestMail($details));
         }
 
 
+        if ($request->has('image')) {
+            Storage::delete($request->image);
+            $path = $request->file('image')->store('tasks');
+            DB::table('tasks')
+                ->where('id', $id)
+                ->update([
+                    'status_id' => $request->status_id,
+                    'name' => $request->name,
+                    'project_id' => $request->project_id,
+                    'image' => $path,
+                    'updated_at' => \Carbon\Carbon::now()
 
-        DB::table('tasks')
-            ->where('id', $id)
-            ->update([
-                'status_id' => $request->status_id,
-                'name' => $request->name,
-                'project_id' => $request->project_id,
-                'image' => $path,
-                'updated_at' => \Carbon\Carbon::now()
+                ]);
+        } else {
+            DB::table('tasks')
+                ->where('id', $id)
+                ->update([
+                    'status_id' => $request->status_id,
+                    'name' => $request->name,
+                    'project_id' => $request->project_id,
+                    'updated_at' => \Carbon\Carbon::now()
 
-            ]);
+                ]);
+        }
+
         return redirect()->route('status_project', ['pid' => $request->status_id, 'sid' => $request->project_id]);
     }
 
