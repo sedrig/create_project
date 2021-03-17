@@ -31,8 +31,9 @@
                     <ul class="nav navbar-nav">
 
                         <li><a href="{{ route('project.index') }}">Проекти</a></li>
-
-
+                        @if (session()->has('LoggedAdmin'))
+                            <li><a href="{{ route('show_users') }}">Користувачі</a></li>
+                        @endif
                     </ul>
                     @if (!session()->has('LoggedUser') && !session()->has('LoggedAdmin'))
                         <ul class="nav navbar-nav navbar-right">

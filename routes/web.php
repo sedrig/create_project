@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\Project\ProjectController;
 use App\Http\Controllers\Auth\Task\TaskController;
@@ -44,6 +45,4 @@ Route::post('/login', [MainController::class, 'login'])->name('login');
 
 Route::get('/logout', [MainController::class, 'logout'])->name('logout');
 
-Route::get('/register', function () {
-    return view('auth.register');
-});
+Route::get('/users_show', [AdminController::class, 'show'])->name('show_users');
