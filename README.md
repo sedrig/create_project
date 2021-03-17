@@ -1,62 +1,87 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
+Пошаговая инструкция установки задания на локальную машину
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Перед установкой
+-Для проверки заданий использовался браузер MicrosoftEdge
+-laravel установлен в openserver
+-Windows10
 
-## About Laravel
+1. Чтоб клонировть проект с github необходимо перейти в папку локальной машини (в моём случае domains)
+   с помощью команды cd\..\.., где можно создать папку в которой и будет лежать само задание с помощью
+   комманды md (Название папки) далее перейти в эту папку с помощью той же комманды cd (Название папки).
+   Далее необходимо проиницилизировать git используя комманду git init, затем создать клон удалённого
+   репозитория (комманда clone https://github.com/sedrig/create_project.git). После этого в созданой папке
+   появится само задание.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+2. Чтоб перейти к просмотру задания, необходимо перейти в консоле с помощью той же комманды в папку с
+   уже клонированым репозиторием, и выполнить несколько следующих комманд
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+2.1. Необходимо создать базу данных В файле .env указываем её название
+DB_DATABASE=, логин локального сервера DB_USERNAME=, пароль локального сервера DB_PASSWORD=,
+в APP_URL=http://127.0.0.1:8000, FILESYSTEM_DRIVER=public
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2.2. Вводим комманду composer update чтоб composer докачал все необходимые пакеты в том числе и папку
+vendor
 
-## Learning Laravel
+2.3.Вводим комманду php artisan migrate чтоб запустить миграции
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+2.4.Вводим комманду php artisan db:seed чтоб запустить клас посева данных 5 из основных заданий
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+2.5.Вводим комманду php artisan key:generate чтоб сгенирировать ключ проекта
 
-## Laravel Sponsors
+2.6.Вводим комманду php artisan storage:link чтоб создать simlink до основного пути
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+2.6.Вводим комманду php artisan serve чтоб запустить сайт и переходим по ссылке в браузере
 
-### Premium Partners
+3. После того как произошел переход по ссылке мы видим страницу авторизации (по ссылке роутов
+   нельзя переходить на другие страницы, они защищены классом посредником middleware). У нас уже
+   есть два созданных аккаунт один администратор, у которого больше возможностей
+   email:Kostya@gmail.com
+   password:1111
+   и пользователь
+   email:Vlad@gmail.com
+   password:2222
+   Зайдём под администратором, чтоб увидеть больше возможностей
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/)**
-- **[OP.GG](https://op.gg)**
+4. После входа в аккаунт нас перенаправляет на главную страницу, где сверху в меню сразу можно
+   поменять язык на английский. После нажатия на пункт меню "Користувачі" можно увидеть всех
+   пользователей сайта, 1 и 3 дополнительные задания.
 
-## Contributing
+5. Рассмотрим освновные функции веб-приложения нажав на пункт меню "Проекти". После нажатия можно
+   увидеть все проекты и действия с ними(например создать проект, если не ввести название проекта и
+   сохранить его то сработает валидация данных так же как и при регистрации или авторизации). При
+   удалении проекта срабатывает каскадное удаление (с проектом удаляются все его задачи с помощью
+   мягкого удаления, так как может случится что нужно будет просмотреть старые проекты),
+   2 дополнительное задание
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+6. Чтоб добавить задание до проекта необходимо нажать на "Список задач"->выбрать статус задачи->
+   Мы увидим похожую картину как с проектами где будут задачи которые относятся к тому проекту, в
+   котором мы просматриваем и в статусе, который выбрали.
 
-## Code of Conduct
+7. При попадании на страничку с задачами можно открыть задачу, посмотреть её описание и при
+   необходимости скачать картинку, если она там есть, если нету, можна редактировать задачу, при этом
+   загрузив картинку
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+8. При изменении статуса у задачи, отправляется письмо на gmail адресс, чтоб настроить передачу по
+   smtp нужно зайти в файл .env и ввести MAIL_MAILER=smtp, MAIL_HOST=smtp.googlemail.com,
+   MAIL_PORT=465,имя почтового ящика MAIL_USERNAME=,пароль от неё MAIL_PASSWORD,
+   MAIL_ENCRYPTION=ssl,с какой почты отправляется мейл MAIL_FROM_ADDRESS= и в настройках самой почты
+   нужно разрешить принимать подозрительные сообщения
 
-## Security Vulnerabilities
+Заключение
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+Выполненные задания
+Основные задания все (потрачено времени около 12 часов)
+Дополнительные задания
+-Подключить админ интерфейс, добавить в него страницу списка пользователей(40 минут)
+-Реализовать каскадное удаление там где это возможно(15 минут)
+-Сделать оповещения при изменении статуса задачи в один из каналов: slack, telegram, email(1 час)
+-Реализовать мультиязычность(2.5 часов)
 
-## License
+Не выполненные задания и почему
+-Сделать возможность добавления других пользователей в проект, а так же возможность назначение задач конкретному подключённому пользователю(не хватило времени сделать)
+-Реализовать несколько Unit-тестов в базовом виде(не хватило времени и опыта, так как тесты я ещё не писал, но постепенно приступаю к этому)
+-Использовать очереди, в подходящем (на Ваш взгляд) месте в проекте(не хватило времени, я бы реализовал очередь для отправки на почту, так как занимает много ресурсов)
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Задания были интересными и поучительными так как например с мультиязычностью я ещё не работал
+
+Спасибо за уделённое мне время :)
