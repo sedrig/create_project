@@ -29,8 +29,9 @@
 
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-
-                        <li><a href="{{ route('project.index') }}">Проекти</a></li>
+                        @if (session()->has('LoggedUser') || session()->has('LoggedAdmin'))
+                            <li><a href="{{ route('project.index') }}">Проекти</a></li>
+                        @endif
                         @if (session()->has('LoggedAdmin'))
                             <li><a href="{{ route('show_users') }}">Користувачі</a></li>
                         @endif
