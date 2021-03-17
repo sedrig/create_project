@@ -1,9 +1,9 @@
 @extends('auth.layouts.master')
 
 @isset($tasky)
-    @section('title', 'Редактировать категорию' . $tasky->name)
+    @section('title', 'Редагувати задачу' . $tasky->name)
     @else
-    @section('title', 'Создать категорию')
+    @section('title', 'Створити задачу')
     @endisset
 
 
@@ -32,6 +32,9 @@
                         <input type="text" class="form-control" name="name" id="name"
                             value="@isset($tasky){{ $tasky->name }} @endisset">
                     </div>
+                    @error('name')
+                        {{ $message }}
+                    @enderror
                 </div>
                 <br>
                 <br>
@@ -45,6 +48,9 @@
                         @endforeach
                     </select>
                 </div>
+                @error('status_id')
+                    {{ $message }}
+                @enderror
             </div>
 
             <div class="input-group row">
@@ -63,6 +69,7 @@
                         @lang('main.upload') <input type="file" style="display: none;" name="image" id="image">
                     </label>
                 </div>
+
             </div>
             <br>
             <br>

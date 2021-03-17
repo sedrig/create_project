@@ -1,6 +1,6 @@
 @extends('auth.layouts.master')
 
-@section('title', 'Категория ' . $task->name)
+@section('title', 'Задача ' . $task->name)
 
 @section('content')
     <div class="col-md-12">

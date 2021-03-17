@@ -1,9 +1,9 @@
 @extends('auth.layouts.master')
 
 @isset($projecty)
-    @section('title', 'Редактировать категорию' . $projecty->name)
+    @section('title', 'Редагувати проект' . $projecty->name)
     @else
-    @section('title', 'Создать категорию')
+    @section('title', 'Створити проект')
     @endisset
 
 
@@ -32,6 +32,9 @@
                         <input type="text" class="form-control" name="name" id="name"
                             value="@isset($projecty){{ $projecty->name }} @endisset">
                     </div>
+                    @error('name')
+                        {{ $message }}
+                    @enderror
                 </div>
                 <br>
                 <br>

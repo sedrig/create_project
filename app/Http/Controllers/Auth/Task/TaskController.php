@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth\Task;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TaskRequest;
 use App\Mail\TestMail;
 use App\Models\Project;
 use App\Models\Status;
@@ -75,7 +76,7 @@ class TaskController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TaskRequest $request)
     {
         //dd($request->all());
         $path = $request->file('image')->store('tasks');
@@ -139,7 +140,7 @@ class TaskController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TaskRequest $request, $id)
     {
 
 

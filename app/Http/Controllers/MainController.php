@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegistrationRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
@@ -50,7 +52,7 @@ class MainController extends Controller
         return view('auth.login');
     }
 
-    public function register(Request $request)
+    public function register(RegistrationRequest $request)
     {
         //dump($request->all());
         $query = DB::table('users')
@@ -66,7 +68,7 @@ class MainController extends Controller
         }
     }
 
-    public function login(Request $request)
+    public function login(LoginRequest $request)
     {
         $user = DB::table('users')
             ->where('email', $request->email)

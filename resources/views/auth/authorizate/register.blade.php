@@ -28,6 +28,9 @@
                         <input id="email" type="email" class="form-control" name="email" value="" required>
 
                     </div>
+                    @error('email')
+                        {{ $message }}
+                    @enderror
                 </div>
 
                 <div class="form-group row">
