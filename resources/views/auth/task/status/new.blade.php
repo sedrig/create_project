@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Завдання New</h1>
+        <h1>@lang('main.task') New</h1>
         <table class="table">
             <tbody>
                 <tr>
@@ -12,10 +12,10 @@
                         #
                     </th>
                     <th>
-                        Назва
+                        @lang('main.name')
                     </th>
                     <th>
-                        Дії
+                        @lang('main.actions')
                     </th>
                 </tr>
                 @foreach ($tasks as $task)
@@ -27,12 +27,12 @@
                             <div class="btn-group" role="group">
                                 <form action="{{ route('task.destroy', $task) }}" method="post">
                                     <a class="btn btn-success" type="button"
-                                        href="{{ route('task.show', $task, $sid) }}">Відкрити</a>
+                                        href="{{ route('task.show', $task, $sid) }}">@lang('main.open')</a>
                                     <a class="btn btn-warning" type="button"
-                                        href="{{ route('task_edit', ['pid' => $task->id, 'sid' => $sid]) }}">Редагувати</a>
+                                        href="{{ route('task_edit', ['pid' => $task->id, 'sid' => $sid]) }}">@lang('main.edit')</a>
                                     @csrf
                                     @method('delete')
-                                    <input class="btn btn-danger" type="submit" value="Видалити">
+                                    <input class="btn btn-danger" type="submit" value="@lang('main.delete')">
                                 </form>
                             </div>
                         </td>
@@ -43,6 +43,6 @@
             </tbody>
         </table>
         {{ $tasks->links() }}
-        <a class="btn btn-success" type="button" href="{{ route('task_create', $sid) }}">Додати завдання</a>
+        <a class="btn btn-success" type="button" href="{{ route('task_create', $sid) }}">@lang('main.add_task')</a>
     </div>
 @endsection

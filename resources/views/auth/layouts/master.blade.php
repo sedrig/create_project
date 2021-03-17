@@ -30,19 +30,21 @@
                 <div id="navbar" class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         @if (session()->has('LoggedUser') || session()->has('LoggedAdmin'))
-                            <li><a href="{{ route('project.index') }}">Проекти</a></li>
+                            <li><a href="{{ route('project.index') }}">@lang('main.projects')</a></li>
+
+                            <li><a href="{{ route('locale', __('main.set_lang')) }}">@lang('main.set_lang')</a></li>
                         @endif
                         @if (session()->has('LoggedAdmin'))
-                            <li><a href="{{ route('show_users') }}">Користувачі</a></li>
+                            <li><a href="{{ route('show_users') }}">@lang('main.users')</a></li>
                         @endif
                     </ul>
                     @if (!session()->has('LoggedUser') && !session()->has('LoggedAdmin'))
                         <ul class="nav navbar-nav navbar-right">
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login_form') }}">Увійти</a>
+                                <a class="nav-link" href="{{ route('login_form') }}">@lang('main.log_in')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register_form') }}">Зареєструватися</a>
+                                <a class="nav-link" href="{{ route('register_form') }}">@lang('main.registration')</a>
                             </li>
                         </ul>
                     @endif
@@ -52,21 +54,21 @@
 
                         @if (session()->has('LoggedAdmin'))
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Адміністратор</a>
+                                <a class="nav-link" href="#">@lang('main.administration')</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}">Вийти</a>
+                                <a class="nav-link" href="{{ route('logout') }}">@lang('main.log_off')</a>
                             </li>
                         @endif
                         @if (session()->has('LoggedUser'))
 
                             <li class="nav-item">
-                                <a class="nav-link" href="#">Користувач</a>
+                                <a class="nav-link" href="#">@lang('main.user')</a>
 
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="{{ route('logout') }}">Вийти</a>
+                                <a class="nav-link" href="{{ route('logout') }}">@lang('main.log_off')</a>
                             </li>
 
                         @endif

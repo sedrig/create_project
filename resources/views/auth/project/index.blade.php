@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Проекти</h1>
+        <h1>@lang('main.projects')</h1>
         <table class="table">
             <tbody>
                 <tr>
@@ -12,10 +12,10 @@
                         #
                     </th>
                     <th>
-                        Назва
+                        @lang('main.name')
                     </th>
                     <th>
-                        Дії
+                        @lang('main.actions')
                     </th>
                 </tr>
                 @foreach ($projects as $project)
@@ -27,15 +27,14 @@
                             <div class="btn-group" role="group">
                                 <form action="{{ route('project.destroy', $project) }}" method="post">
                                     <a class="btn btn-success" type="button"
-                                        href="{{ route('project.show', $project) }}">Відкрити</a>
+                                        href="{{ route('project.show', $project) }}">@lang('main.open')</a>
                                     <a class="btn btn-warning" type="button"
-                                        href="{{ route('project.edit', $project) }}">Редагувати</a>
+                                        href="{{ route('project.edit', $project) }}">@lang('main.edit')</a>
                                     @csrf
                                     @method('delete')
-                                    <input class="btn btn-danger" type="submit" value="Видалити">
+                                    <input class="btn btn-danger" type="submit" value="@lang('main.delete')">
                                     <a class="btn btn-success" type="button"
-                                        href="{{ route('with_project', $project) }}">Список
-                                        задач</a>
+                                        href="{{ route('with_project', $project) }}">@lang('main.task_list')</a>
                                 </form>
                             </div>
                         </td>
@@ -46,6 +45,6 @@
             </tbody>
         </table>
         {{ $projects->links() }}
-        <a class="btn btn-success" type="button" href="{{ route('project.create') }}">Додати проект</a>
+        <a class="btn btn-success" type="button" href="{{ route('project.create') }}">@lang('main.add_project')</a>
     </div>
 @endsection

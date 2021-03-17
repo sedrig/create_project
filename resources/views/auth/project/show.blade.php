@@ -1,18 +1,18 @@
 @extends('auth.layouts.master')
 
-@section('title', 'Категория ' . $project->name)
+@section('title', 'Проект ' . $project->name)
 
 @section('content')
     <div class="col-md-12">
-        <h1>Проект </h1>
+        <h1>@lang('main.project')</h1>
         <table class="table">
             <tbody>
                 <tr>
                     <th>
-                        Поле
+                        @lang('main.field')
                     </th>
                     <th>
-                        Значення
+                        @lang('main.value')
                     </th>
                 </tr>
                 <tr>
@@ -20,15 +20,15 @@
                     <td>{{ $project->id }}</td>
                 </tr>
                 <tr>
-                    <td>Назва</td>
+                    <td>@lang('main.name')</td>
                     <td>{{ $project->name }}</td>
                 </tr>
                 <tr>
-                    <td>Створений</td>
+                    <td>@lang('main.generated')</td>
                     <td>{{ $project->created_at }}</td>
                 </tr>
                 <tr>
-                    <td>Оновлений</td>
+                    <td>@lang('main.updated')</td>
                     <td>{{ $project->updated_at }}</td>
                 </tr>
             </tbody>

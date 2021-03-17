@@ -34,6 +34,7 @@ Route::prefix('/authenticate')->group(function () {
     Route::get('auth/project', [AuthController::class, 'index'])->name('project');
 });
 
+Route::get('locale/{locale}', [MainController::class, 'locale'])->name('locale');
 
 Route::get('/login_form', [MainController::class, 'login_form'])->name('login_form');
 

@@ -13,9 +13,9 @@ class User extends Model
     public function status_user($id)
     {
         if ($id == 1) {
-            return ('Так');
+            return ('Yes');
         } else {
-            return ('Ні');
+            return ('No');
         }
     }
 }

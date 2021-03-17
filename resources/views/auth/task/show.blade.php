@@ -4,15 +4,15 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Проект </h1>
+        <h1>@lang('main.task') </h1>
         <table class="table">
             <tbody>
                 <tr>
                     <th>
-                        Поле
+                        @lang('main.field')
                     </th>
                     <th>
-                        Значення
+                        @lang('main.value')
                     </th>
                 </tr>
                 <tr>
@@ -20,30 +20,30 @@
                     <td>{{ $task->id }}</td>
                 </tr>
                 <tr>
-                    <td>Назва завдання</td>
+                    <td>@lang('main.name_task')</td>
                     <td>{{ $task->name }}</td>
                 </tr>
                 <tr>
-                    <td>Статус проекту</td>
+                    <td>@lang('main.status_task')</td>
                     <td>{{ $task->status->name }}</td>
                 </tr>
                 <tr>
-                    <td>Назва проекту</td>
+                    <td>@lang('main.name_project')</td>
                     <td>{{ $task->project->name }}</td>
                 </tr>
                 <tr>
-                    <td>Завантажена картинка</td>
+                    <td>@lang('main.download_picture')</td>
 
                     <td><img src="{{ Storage::url($task->image) }}" height="240px"></td>
-                    <td><a class="btn btn-success" type="button" href="{{ route('download', $task->id) }}">Завантажити
-                            картинку</a></td>
+                    <td><a class="btn btn-success" type="button"
+                            href="{{ route('download', $task->id) }}">@lang('main.download')</a></td>
                 </tr>
                 <tr>
-                    <td>Створений</td>
+                    <td>@lang('main.generated')</td>
                     <td>{{ $task->created_at }}</td>
                 </tr>
                 <tr>
-                    <td>Оновлений</td>
+                    <td>@lang('main.updated')</td>
                     <td>{{ $task->updated_at }}</td>
                 </tr>
             </tbody>

@@ -12,9 +12,9 @@
         <div class="col-md-12">
 
             @isset($projecty)
-                <h1>Редагувати проект <b>{{ $projecty->name }}</b></h1>
+                <h1>@lang('main.edit_project')<b>{{ $projecty->name }}</b></h1>
             @else
-                <h1>Додати проект</h1>
+                <h1>@lang('main.add_project')</h1>
             @endisset
             <form method="POST" enctype="multipart/form-data" @isset($projecty)
             action="{{ route('project.update', $projecty->id) }}" @else action="{{ route('project.store') }}" @endisset>
@@ -26,7 +26,7 @@
 
                 <br>
                 <div class="input-group row">
-                    <label for="name" class="col-sm-2 col-form-label">Назва: </label>
+                    <label for="name" class="col-sm-2 col-form-label">@lang('main.name'): </label>
                     <div class="col-sm-6">
 
                         <input type="text" class="form-control" name="name" id="name"
@@ -35,7 +35,7 @@
                 </div>
                 <br>
                 <br>
-                <button class="btn btn-success">Зберігти</button>
+                <button class="btn btn-success">@lang('main.save')</button>
             </div>
         </form>
     </div>

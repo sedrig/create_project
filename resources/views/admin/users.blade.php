@@ -4,7 +4,7 @@
 
 @section('content')
     <div class="col-md-12">
-        <h1>Проекти</h1>
+        <h1>@lang('main.users')</h1>
         <table class="table">
             <tbody>
                 <tr>
@@ -12,19 +12,19 @@
                         #
                     </th>
                     <th>
-                        Ім'я
+                        @lang('main.name_us')
                     </th>
                     <th>
                         Email
                     </th>
                     <th>
-                        Чи це адміністратор
+                        @lang('main.administration')
                     </th>
                     <th>
-                        Час створення
+                        @lang('main.generated')
                     </th>
                     <th>
-                        Час оновлення
+                        @lang('main.updated')
                     </th>
                 </tr>
                 @foreach ($query as $value)
